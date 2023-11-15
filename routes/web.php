@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get("datarumah",[HouseController::class,'index'])->name('datarumah');
+    Route::patch("datarumah",[HouseController::class,'update_pemilik'])->name('datarumah.update_pemilik');
+
     Route::get("bayar/{house}",[HouseController::class,'bayar'])->name('bayar');
     Route::post("bayar/{house}",[HouseController::class,'bayar_proses'])->name('bayar.proses');
 });

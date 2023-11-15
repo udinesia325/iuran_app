@@ -30,4 +30,21 @@ class HouseController extends Controller
         ]);
         return redirect()->to(route('datarumah'));
     }
+
+    function update_pemilik(Request $request){
+       $id = $request->input('id');
+       $pemilik = $request->input('pemilik');
+       $kategori = $request->input('kategori');
+
+       $house = House::find($id);
+
+       $house->pemilik = $pemilik;
+       $house->kategori = $kategori;
+       $house->active = 1;
+
+       $house->save();
+
+       return redirect()->to(route('datarumah'));
+
+    }
 }
