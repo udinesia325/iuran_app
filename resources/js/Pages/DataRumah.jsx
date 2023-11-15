@@ -1,14 +1,17 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
-export default function DataRumah({ auth, data }) {
+export default function DataRumah({ auth, data,flash }) {
     const [openModal, setOpenModal] = useState(false);
 
+    useEffect(() => {
+        if(flash.success){
+            toast.success(flash.success)
+        }
+    },[flash])
     
-
-    const inputPemilikRef = useRef(null);
-    const inputKategoriRef = useRef(null);
 
     const {
         data: houseForm,
@@ -133,9 +136,11 @@ export default function DataRumah({ auth, data }) {
                                                 {d.active == 0 ? (
                                                     <Link
                                                         className="btn btn-error"
-                                                        href={route("bayar", {
+                                                        href={route("datarumah.kosongkan", {
                                                             house: d.id,
                                                         })}
+                                                        method="post"
+                                                        as="button"
                                                     >
                                                         Kosongkan
                                                     </Link>
